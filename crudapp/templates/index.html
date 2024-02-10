@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crud</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5 p-5 border rounded">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="mb-3 alert alert-success text-center">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="d-flex justify-content-between align-items-center">
+      <a href="" data-bs-toggle="modal" data-bs-target="#addstockModal" class="btn btn-primary px-5 py-2 btn-sm">Add
+        stock info</a>
+      <div>
+        <form method="post" class="d-flex">
+          {% csrf_token %}
+          <input type="search" name="query" class="form-control" placeholder="search..." value="{{search_query}}">
+          <button class="btn btn-success btn-sm px-3 mx-2" name="search">Search</button>
+        </form>
+      </div>
+    </div>
+    <table class="table table-striped table-hover table-bordered mt-3">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Date</th>
+          <th scope="col">Trade Code</th>
+          <th scope="col">High</th>
+          <th scope="col">Low</th>
+          <th scope="col">Open</th>
+          <th scope="col">Close</th>
+          <th scope="col">Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ["id","date", "trade_code", "high", "low", "open", "close", "volume"]  -->
+        {% for stock in stocks %}
+        <tr>
+          <th>{{stock.id}}</th>
+          <td>{{stock.date}}</td>
+          <td>{{stock.trade_code}}</td>
+          <td>{{stock.high}}</td>
+          <td>{{stock.low}}</td>
+          <td>{{stock.open}}</td>
+          <td>{{stock.close}}</td>
+          <td>{{stock.volume}}</td>
+          <td>
+            <a href="" data-bs-toggle="modal" data-bs-target="#updatestockModal_{{stock.id}}"
+              class="btn btn-sm btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#deletestockModal_{{stock.id}}"
+              class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        <!-- update stock modal -->
+        <div class="modal fade" id="updatestockModal_{{stock.id}}" tabindex="-1"
+          aria-labelledby="updatestockModal_{{stock.id}}Label" aria-hidden="true">
+          <div class="modal-dialog">
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="updatestockModal_{{stock.id}}Label">Add new stock</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" name="id" value="{{stock.id}}">
+                  <div class="">
+                    <!-- <label for="date">Date</label>
+                    <input required type="date" name="date" class="form-control" value="{{stock.date}}" pattern="\d{4}-\d{2}-\d{2}"
+                      placeholder="YYYY-MM-DD"> -->
+                    <label for="date">Date</label>
+                    <input required type="text" name="date" id="datepicker{{stock.id}}" class="form-control"
+                      value="{{stock.date}}" placeholder="MMM. D, YYYY">
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+                    <script>
+                      $(function () {
+                        $("#datepicker{{stock.id}}").datepicker({
+                          dateFormat: "M. d, yy"
+                        });
+                      });
+                    </script>
+                  </div>
+                  <div class="mt-3">
+                    <label for="trade_code">Trade Code</label>
+                    <input required type="text" name="trade_code" class="form-control" value="{{stock.trade_code}}"
+                      placeholder="Trade code">
+                  </div>
+                  <div class="mt-3">
+                    <label for="high">High</label>
+                    <input required type="number" name="High" class="form-control" value="{{stock.high}}"
+                      placeholder="High" step="any" pattern="\d+(\.\d{1,2})?"
+                      title="Please enter a valid decimal value">
+                  </div>
+                  <div class="mt-3">
+                    <label for="low">Low</label>
+                    <input required type="number" name="Low" class="form-control" value="{{stock.low}}"
+                      placeholder="Low" step="any" pattern="\d+(\.\d{1,2})?" title="Please enter a valid decimal value">
+                  </div>
+                  <div class="mt-3">
+                    <label for="open">Open</label>
+                    <input required type="number" name="Open" class="form-control" value="{{stock.open}}"
+                      placeholder="Open" step="any" pattern="\d+(\.\d{1,2})?"
+                      title="Please enter a valid decimal value">
+                  </div>
+                  <div class="mt-3">
+                    <label for="close">Close</label>
+                    <input required type="number" name="Close" class="form-control" value="{{stock.close}}"
+                      placeholder="Close" step="any" pattern="\d+(\.\d{1,2})?"
+                      title="Please enter a valid decimal value">
+                  </div>
+                  <div class="mt-3">
+                    <label for="volume">Volume</label>
+                    <input required type="number" name="volume" class="form-control" value="{{stock.volume}}"
+                      placeholder="Volume" step="any" pattern="\d+(\.\d{1,2})?"
+                      title="Please enter a valid decimal value">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary" name="update">Update stock</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- delete stock modal -->
+        <div class="modal fade" id="deletestockModal_{{stock.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+          tabindex="-1" aria-labelledby="deletestockModal_{{stock.id}}Label" aria-hidden="true">
+          <div class="modal-dialog">
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{stock.id}}">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <p>Are you sure? you want to delete</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-danger" name="delete">Delete stock</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+          </ul>
+        </div>
+        {% endfor %}
+      </tbody>
+    </table>
+    <!-- <div class="pagination">
+      <ul class="pagination">
+          {% for page_num in stocks.paginator.page_range %}
+              <li class="page-item {% if page_num == stocks.number %}active{% endif %}">
+                  <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+              </li>
+          {% endfor %}
+      </ul>
+  </div> -->
+    <!-- Add this section below your table -->
+  <!-- Add this section below your table -->
+<div class="pagination">
+  <ul class="pagination">
+      {% if stocks.paginator.num_pages > 10 %}
+          {% if stocks.number > 5 %}
+              <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% endif %}
+          {% for i in stocks.paginator.page_range %}
+              {% if i > stocks.number|add:"-5" and i < stocks.number|add:"5" %}
+                  <li class="page-item {% if i == stocks.number %}active{% endif %}">
+                      <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                  </li>
+              {% endif %}
+          {% endfor %}
+          {% if stocks.number < stocks.paginator.num_pages|add:"-4" %}
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+              <li class="page-item"><a class="page-link" href="?page={{ stocks.paginator.num_pages }}">{{ stocks.paginator.num_pages }}</a></li>
+          {% endif %}
+      {% else %}
+          {% for i in stocks.paginator.page_range %}
+              <li class="page-item {% if i == stocks.number %}active{% endif %}">
+                  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+              </li>
+          {% endfor %}
+      {% endif %}
+  </ul>
+</div>
+
+
+
+  </div>
+
+
+
+  <!-- add Modal -->
+  <div class="modal fade" id="addstockModal" tabindex="-1" aria-labelledby="addstockModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addstockModalLabel">Add new stock info</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="">
+              <label for="date">Date</label>
+              <input required type="date" name="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}"
+                placeholder="YYYY-MM-DD">
+
+            </div>
+            <div class="mt-3">
+              <label for="trade_code">Trade Code</label>
+              <input required type="text" name="trade_code" class="form-control" placeholder="Trade code">
+            </div>
+            <div class="mt-3">
+              <label for="high">High</label>
+              <input required type="number" name="High" class="form-control" placeholder="High" step="any"
+                pattern="\d+(\.\d{1,2})?" title="Please enter a valid decimal value">
+            </div>
+            <div class="mt-3">
+              <label for="low">Low</label>
+              <input required type="number" name="Low" class="form-control" placeholder="Low" step="any"
+                pattern="\d+(\.\d{1,2})?" title="Please enter a valid decimal value">
+            </div>
+            <div class="mt-3">
+              <label for="open">Open</label>
+              <input required type="number" name="Open" class="form-control" placeholder="Open" step="any"
+                pattern="\d+(\.\d{1,2})?" title="Please enter a valid decimal value">
+            </div>
+            <div class="mt-3">
+              <label for="close">Close</label>
+              <input required type="number" name="Close" class="form-control" placeholder="Close" step="any"
+                pattern="\d+(\.\d{1,2})?" title="Please enter a valid decimal value">
+            </div>
+            <div class="mt-3">
+              <label for="volume">Volume</label>
+              <input required type="number" name="volume" class="form-control" placeholder="Volume" step="any"
+                pattern="\d+(\.\d{1,2})?" title="Please enter a valid decimal value">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" name="create">Add new stock info</button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

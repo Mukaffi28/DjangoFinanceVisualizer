@@ -10,7 +10,7 @@ Welcome to the Django JSON Visualization Web App! This web application is design
 
 - **Visualization**: Upon accessing the home page, the `home` function in `views.py` processes the JSON data and renders visual representations for an enhanced user experience.
 
-# Task 2
+## Task 2
 
 ## Overview
 
@@ -47,7 +47,7 @@ Welcome to the Django CRUD Application for Stock Management! This web applicatio
 
    Use the search feature to find specific stock information quickly.
 
-# Task 3
+## Task 3
 
 ## Overview
 

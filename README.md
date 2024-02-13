@@ -1,8 +1,9 @@
-# Django JSON Visualization Web App
+# Django CRUD Web App with SQL Server Integration
+Greetings to this Django web application repository, where you can explore CRUD operations seamlessly integrated with SQL Server and experience interactive chart visualization. Feel free to visit the website at https://mukaffi28.pythonanywhere.com/.
 
 ## Task 1
 
-Welcome to the Django JSON Visualization Web App! This web application is designed to display visual representations of data provided in a JSON format. You can access the app at either [https://mukaffi28.pythonanywhere.com/home/](https://mukaffi28.pythonanywhere.com/home/) or [http://127.0.0.1:8000/home/](http://127.0.0.1:8000/home/).
+Django JSON Visualization Web App! This web application is designed to display visual representations of data provided in a JSON format. You can access the app at either [https://mukaffi28.pythonanywhere.com/home/](https://mukaffi28.pythonanywhere.com/home/) or [http://127.0.0.1:8000/home/](http://127.0.0.1:8000/home/).
 
 ## Features
 
@@ -14,7 +15,7 @@ Welcome to the Django JSON Visualization Web App! This web application is design
 
 ## Overview
 
-Welcome to the Django CRUD Application for Stock Management! This web application allows users to perform CRUD operations (Create, Read, Update, Delete) on stock data. You can access the app at [https://mukaffi28.pythonanywhere.com/](https://mukaffi28.pythonanywhere.com/).
+Django CRUD Application for Stock Management! This web application allows users to perform CRUD operations (Create, Read, Update, Delete) on stock data. You can access the app at [https://mukaffi28.pythonanywhere.com/](https://mukaffi28.pythonanywhere.com/).
 
 ## Features
 
@@ -90,5 +91,47 @@ Welcome to the Financial Data Visualization App! This application provides a com
    - Explore the top 10 trade codes with the highest trading volumes.
    - Analyze the top 10 trade codes based on opening prices.
    - Understand the top 10 trade codes based on closing prices.
+
+## Learning Journey Summary
+
+## Django Framework:
+
+- Explored the intricacies of Django's structure, gaining proficiency in models, views, templates, and forms.
+  
+- Successfully set up and configured Django projects, laying the foundation for effective web development.
+
+## SQL Server Integration:
+
+- Embraced the migration process from a JSON model to an SQL model in Django, enhancing data management capabilities.
+  
+- Learned the art of connecting Django to an SQL Server, enabling seamless CRUD operations for efficient data handling.
+
+## Data Visualization:
+
+- Implemented visually appealing table visualization using Django templates, enhancing the presentation of data.
+  
+- Mastered the creation of line and bar charts with Chart.js, providing dynamic and engaging data representation.
+
+- Developed a multi-axis chart, integrating dropdowns for dynamic data changes and a richer user experience.
+
+## Deployment:
+
+- Successfully deployed a Django application on a cloud hosting service, gaining practical insights into the deployment process.
+
+## Challenges Faced
+
+Throughout the project development, I navigated several challenges that enriched my learning experience:
+
+## Loading Data to JSON:
+
+- Encountered issues where some volume column entries were in string format instead of decimal, necessitating conversion for accurate representation.
+
+## Data Formatting:
+
+- Addressed challenges posed by data entries containing commas (e.g., "22,200"), requiring removal or conversion to ensure proper formatting and consistency across the dataset.
+
+## Deployment:
+
+- Overcome deployment challenges by meticulously configuring the environment, ensuring a smooth transition, and verifying that the application runs seamlessly on the chosen hosting service.
 
 

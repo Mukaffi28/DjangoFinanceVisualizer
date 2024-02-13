@@ -47,4 +47,48 @@ Welcome to the Django CRUD Application for Stock Management! This web applicatio
 
    Use the search feature to find specific stock information quickly.
 
+# Task 3
+
+## Overview
+
+Welcome to the Financial Data Visualization App! This application provides a comprehensive view of financial market data through multi-axis charts and pie charts. Users can explore Close price, Open price, and Volume trends, along with a candlestick chart specific to the chosen trade_code. Additionally, three pie charts offer insights into the top 10 trade codes based on different criteria. You can access the app at [https://mukaffi28.pythonanywhere.com/stock-chart/](https://mukaffi28.pythonanywhere.com/stock-chart/) or through the 'Visualization' button in the navigation bar.
+
+## Features
+
+- **Multi-Axis Chart:**
+ The application incorporates a multi-axis chart displaying Close price, Open price, and Volume trends for a comprehensive overview of market data.
+
+- **Candlestick Chart:**
+  Users can choose a specific trade_code to view a detailed candlestick chart, offering insights into Open, Close, High, and Low prices.
+
+- **Pie Charts:**
+  - **Top 10 Trade Codes with Highest Trading Volumes:**
+    Visual representation of the top 10 trade codes with the highest trading volumes.
+
+  - **Top 10 Trade Codes by Opening Prices:**
+    Pie chart illustrating the top 10 trade codes based on opening prices.
+
+  - **Top 10 Trade Codes by Closing Prices:**
+    Visualization of the top 10 trade codes based on closing prices.
+
+## How to Use
+
+1. **Access the Web App:**
+
+   Visit [https://mukaffi28.pythonanywhere.com/stock-chart/](https://mukaffi28.pythonanywhere.com/stock-chart/) to explore the financial data visualization.
+
+2. **Multi-Axis Chart:**
+
+   - Observe trends in Close price, Open price, and Volume on the multi-axis chart.
+
+3. **Candlestick Chart:**
+
+   - Choose a specific trade_code to view detailed information in the candlestick chart.
+
+4. **Pie Charts:**
+
+   - Explore the top 10 trade codes with the highest trading volumes.
+   - Analyze the top 10 trade codes based on opening prices.
+   - Understand the top 10 trade codes based on closing prices.
+
 
